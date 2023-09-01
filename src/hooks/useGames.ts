@@ -5,10 +5,17 @@ interface Game {
     id: number;
     name: string;
     background_image: string;
+    parent_platforms: {platform: Platform}[];
   }
   
 interface FetchGamesResponse {
     results: Game[];
+}
+
+interface Platform {
+    id: string;
+    name: string;
+    slug: string;
 }
 
 const useGames = () => {

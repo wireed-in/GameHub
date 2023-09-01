@@ -1,20 +1,19 @@
-import { Card, CardBody, Heading, Image, Stack } from "@chakra-ui/react";
+import { Card, CardBody, Heading, Image, Text } from "@chakra-ui/react";
+import PlatformIconList from "./PlatformIconList";
 
 interface Props {
   title: string;
   background: string;
+  platforms: string[];
 }
 
-const GameCard = ({ title, background }: Props) => {
+const GameCard = ({ title, background, platforms }: Props) => {
   return (
     <>
       <Card>
-        <Image
-          src={background}
-          alt="Green double couch with wooden legs"
-          borderRadius="lg"
-        />
+        <Image src={background} borderRadius="lg" />
         <CardBody>
+          <PlatformIconList platforms={platforms} />
           <Heading size="md">{title}</Heading>
         </CardBody>
       </Card>

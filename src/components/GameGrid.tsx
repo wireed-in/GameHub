@@ -14,7 +14,13 @@ const GameGrid = () => {
         padding="10px"
       >
         {games.map((game) => (
-          <GameCard title={game.name} background={game.background_image} />
+          <GameCard
+            title={game.name}
+            background={game.background_image}
+            platforms={game.parent_platforms.map(
+              ({ platform }) => platform.slug
+            )}
+          />
         ))}
       </SimpleGrid>
     </>
