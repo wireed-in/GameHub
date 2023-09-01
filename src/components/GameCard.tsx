@@ -1,19 +1,24 @@
-import { Card, CardBody, Heading, Image, Text } from "@chakra-ui/react";
+import { Card, CardBody, HStack, Heading, Image, Text } from "@chakra-ui/react";
 import PlatformIconList from "./PlatformIconList";
+import CriticScore from "./CriticScore";
 
 interface Props {
   title: string;
   background: string;
   platforms: string[];
+  metacritic: number;
 }
 
-const GameCard = ({ title, background, platforms }: Props) => {
+const GameCard = ({ title, background, platforms, metacritic }: Props) => {
   return (
     <>
       <Card>
         <Image src={background} borderRadius="lg" />
         <CardBody>
-          <PlatformIconList platforms={platforms} />
+          <HStack justifyContent={"space-between"}>
+            <PlatformIconList platforms={platforms} />
+            <CriticScore score={metacritic} />
+          </HStack>
           <Heading size="md">{title}</Heading>
         </CardBody>
       </Card>

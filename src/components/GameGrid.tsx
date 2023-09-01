@@ -20,6 +20,7 @@ const GameGrid = () => {
             platforms={game.parent_platforms.map(
               ({ platform }) => platform.slug
             )}
+            metacritic={game.metacritic}
           />
         ))}
       </SimpleGrid>
