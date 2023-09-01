@@ -22,22 +22,29 @@ interface Platform {
 const useGames = () => {
     const [games, setGames] = useState<Game[]>([]);
     const [error, setError] = useState([]);
+    const [isLoading, setLoading] = useState(false);
 
     useEffect(() => {
         const abortController = new AbortController();
 
+        setLoading(true);
+
         apiClient
             .get<FetchGamesResponse>("/games", { signal: abortController.signal })
-            .then(({ data }) => setGames(data.results))
+            .then(({ data }) => {
+                setGames(data.results);
+                setLoading(false);
+            })
             .catch((err) => {
                 if (err instanceof CanceledError) return;
                 setError(err.message);
+                setLoading(false);
             });
 
         return () => abortController.abort();
     }, []);
 
-    return { games, error };
+    return { games, error, isLoading };
 }
 
 export default useGames;

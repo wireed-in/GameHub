@@ -19,7 +19,9 @@ const GameCard = ({ title, background, platforms, metacritic }: Props) => {
             <PlatformIconList platforms={platforms} />
             <CriticScore score={metacritic} />
           </HStack>
-          <Heading size="md">{title}</Heading>
+          <Heading paddingTop={"20px"} size="md">
+            {title}
+          </Heading>
         </CardBody>
       </Card>
     </>
