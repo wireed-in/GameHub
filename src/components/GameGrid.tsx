@@ -4,8 +4,12 @@ import GameCard from "./GameCard";
 import getCroppedImageUrl from "../services/image-url";
 import GameCardSkeleton from "./GameCardSkeleton";
 
-const GameGrid = () => {
-    const { data: games, error, isLoading } = useGames();
+interface Props {
+    selectedGenre: number | null;
+}
+
+const GameGrid = ({ selectedGenre }: Props) => {
+    const { data: games, error, isLoading } = useGames(selectedGenre);
     const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
     return (
