@@ -14,9 +14,19 @@ interface Platform {
     slug: string;
 }
 
-const useGames = (selectedGenre: number | null) =>
-    useData<Game>("/games", { params: { genres: selectedGenre } }, [
-        selectedGenre,
-    ]);
+const useGames = (
+    selectedGenre: number | null,
+    selectedPlatform: number | null
+) =>
+    useData<Game>(
+        "/games",
+        {
+            params: {
+                genres: selectedGenre,
+                parent_platforms: selectedPlatform,
+            },
+        },
+        [selectedGenre, selectedPlatform]
+    );
 
 export default useGames;
