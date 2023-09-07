@@ -3,6 +3,7 @@ import useData from "./useData";
 export interface GamesQueryParams {
     selectedGenre: number | null;
     selectedPlatform: number | null;
+    selectedSortOrder: string;
 }
 
 interface Game {
@@ -26,6 +27,7 @@ const useGames = (queryParams: GamesQueryParams) =>
             params: {
                 genres: queryParams.selectedGenre,
                 parent_platforms: queryParams.selectedPlatform,
+                ordering: queryParams.selectedSortOrder,
             },
         },
         [queryParams]

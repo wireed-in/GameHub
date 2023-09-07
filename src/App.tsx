@@ -1,10 +1,11 @@
-import { Grid, GridItem, Show } from "@chakra-ui/react";
+import { Grid, GridItem, HStack, Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
 import { useState } from "react";
 import PlatformSelector from "./components/PlatformSelector";
 import { GamesQueryParams } from "./hooks/useGames";
+import SortSelector from "./components/SortSelector";
 
 function App() {
     const [queryParams, setQueryParams] = useState<GamesQueryParams>(
@@ -39,15 +40,26 @@ function App() {
                 </GridItem>
             </Show>
             <GridItem area={"main"}>
-                <PlatformSelector
-                    selectedPlatform={queryParams.selectedPlatform}
-                    onPlatformSelect={(selectedPlatformId) =>
-                        setQueryParams({
-                            ...queryParams,
-                            selectedPlatform: selectedPlatformId,
-                        })
-                    }
-                />
+                <HStack spacing={5} paddingLeft={2} marginBottom={5}>
+                    <PlatformSelector
+                        selectedPlatform={queryParams.selectedPlatform}
+                        onPlatformSelect={(selectedPlatformId) =>
+                            setQueryParams({
+                                ...queryParams,
+                                selectedPlatform: selectedPlatformId,
+                            })
+                        }
+                    />
+                    <SortSelector
+                        selectedSortOrder={queryParams.selectedSortOrder}
+                        onSelectSortOrder={(selectedSortOrderValue) =>
+                            setQueryParams({
+                                ...queryParams,
+                                selectedSortOrder: selectedSortOrderValue,
+                            })
+                        }
+                    />
+                </HStack>
                 <GameGrid gamesQuery={queryParams} />
             </GridItem>
         </Grid>
