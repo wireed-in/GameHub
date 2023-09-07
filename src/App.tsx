@@ -4,11 +4,11 @@ import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
 import { useState } from "react";
 import PlatformSelector from "./components/PlatformSelector";
+import { GamesQueryParams } from "./hooks/useGames";
 
 function App() {
-    const [selectedGenre, setSelectedGenre] = useState<number | null>(null);
-    const [selectedPlatform, setSelectedPlatform] = useState<number | null>(
-        null
+    const [queryParams, setQueryParams] = useState<GamesQueryParams>(
+        {} as GamesQueryParams
     );
 
     return (
@@ -28,22 +28,27 @@ function App() {
             <Show above="lg">
                 <GridItem area={"aside"} paddingX="10px">
                     <GenreList
-                        selectedGenre={selectedGenre}
-                        onSelectGenre={(selectedGenreId: number) =>
-                            setSelectedGenre(selectedGenreId)
+                        selectedGenre={queryParams?.selectedGenre}
+                        onSelectGenre={(selectedGenreId) =>
+                            setQueryParams({
+                                ...queryParams,
+                                selectedGenre: selectedGenreId,
+                            })
                         }
                     />
                 </GridItem>
             </Show>
             <GridItem area={"main"}>
                 <PlatformSelector
-                    selectedPlatform={selectedPlatform}
-                    onPlatformSelect={(id) => setSelectedPlatform(id)}
+                    selectedPlatform={queryParams.selectedPlatform}
+                    onPlatformSelect={(selectedPlatformId) =>
+                        setQueryParams({
+                            ...queryParams,
+                            selectedPlatform: selectedPlatformId,
+                        })
+                    }
                 />
-                <GameGrid
-                    selectedPlatform={selectedPlatform}
-                    selectedGenre={selectedGenre}
-                />
+                <GameGrid gamesQuery={queryParams} />
             </GridItem>
         </Grid>
     );

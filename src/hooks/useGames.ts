@@ -1,5 +1,10 @@
 import useData from "./useData";
 
+export interface GamesQueryParams {
+    selectedGenre: number | null;
+    selectedPlatform: number | null;
+}
+
 interface Game {
     id: number;
     name: string;
@@ -14,19 +19,16 @@ interface Platform {
     slug: string;
 }
 
-const useGames = (
-    selectedGenre: number | null,
-    selectedPlatform: number | null
-) =>
+const useGames = (queryParams: GamesQueryParams) =>
     useData<Game>(
         "/games",
         {
             params: {
-                genres: selectedGenre,
-                parent_platforms: selectedPlatform,
+                genres: queryParams.selectedGenre,
+                parent_platforms: queryParams.selectedPlatform,
             },
         },
-        [selectedGenre, selectedPlatform]
+        [queryParams]
     );
 
 export default useGames;

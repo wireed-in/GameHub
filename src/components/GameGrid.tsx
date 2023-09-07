@@ -1,21 +1,15 @@
 import { SimpleGrid, Text } from "@chakra-ui/react";
-import useGames from "../hooks/useGames";
+import useGames, { GamesQueryParams } from "../hooks/useGames";
 import GameCard from "./GameCard";
 import getCroppedImageUrl from "../services/image-url";
 import GameCardSkeleton from "./GameCardSkeleton";
 
 interface Props {
-    selectedGenre: number | null;
-    selectedPlatform: number | null;
+    gamesQuery: GamesQueryParams;
 }
 
-const GameGrid = ({ selectedGenre, selectedPlatform }: Props) => {
-    const {
-        data: games,
-        error,
-        isLoading,
-    } = useGames(selectedGenre, selectedPlatform);
-    const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const GameGrid = ({ gamesQuery }: Props) => {
+    const { data: games, error, isLoading } = useGames(gamesQuery);
 
     return (
         <>
@@ -26,8 +20,8 @@ const GameGrid = ({ selectedGenre, selectedPlatform }: Props) => {
                 padding="10px"
             >
                 {isLoading &&
-                    skeletons.map((skeleton) => (
-                        <GameCardSkeleton key={skeleton} />
+                    [...Array(10)].map((_, index) => (
+                        <GameCardSkeleton key={index} />
                     ))}
                 {games.map((game, index) => (
                     <GameCard
