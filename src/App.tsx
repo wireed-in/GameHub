@@ -24,7 +24,14 @@ function App() {
             }}
         >
             <GridItem area={"nav"}>
-                <NavBar />
+                <NavBar
+                    onSearchInput={(searchText) =>
+                        setQueryParams({
+                            ...queryParams,
+                            searchText: searchText,
+                        })
+                    }
+                />
             </GridItem>
             <Show above="lg">
                 <GridItem area={"aside"} paddingX="10px">

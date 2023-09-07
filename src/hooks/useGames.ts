@@ -4,6 +4,7 @@ export interface GamesQueryParams {
     selectedGenre: number | null;
     selectedPlatform: number | null;
     selectedSortOrder: string;
+    searchText: string;
 }
 
 interface Game {
@@ -28,6 +29,7 @@ const useGames = (queryParams: GamesQueryParams) =>
                 genres: queryParams.selectedGenre,
                 parent_platforms: queryParams.selectedPlatform,
                 ordering: queryParams.selectedSortOrder,
+                search: queryParams.searchText,
             },
         },
         [queryParams]
