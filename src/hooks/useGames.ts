@@ -1,8 +1,10 @@
 import useData from "./useData";
+import { Genre } from "./useGenres";
+import { Platform } from "./usePlatforms";
 
 export interface GamesQueryParams {
-    selectedGenre: number | null;
-    selectedPlatform: number | null;
+    selectedGenre: Genre;
+    selectedPlatform: Platform;
     selectedSortOrder: string;
     searchText: string;
 }
@@ -15,19 +17,13 @@ interface Game {
     metacritic: number;
 }
 
-interface Platform {
-    id: string;
-    name: string;
-    slug: string;
-}
-
 const useGames = (queryParams: GamesQueryParams) =>
     useData<Game>(
         "/games",
         {
             params: {
-                genres: queryParams.selectedGenre,
-                parent_platforms: queryParams.selectedPlatform,
+                genres: queryParams.selectedGenre?.id,
+                parent_platforms: queryParams.selectedPlatform?.id,
                 ordering: queryParams.selectedSortOrder,
                 search: queryParams.searchText,
             },

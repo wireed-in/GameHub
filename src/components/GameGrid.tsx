@@ -3,6 +3,7 @@ import useGames, { GamesQueryParams } from "../hooks/useGames";
 import GameCard from "./GameCard";
 import getCroppedImageUrl from "../services/image-url";
 import GameCardSkeleton from "./GameCardSkeleton";
+import GameHeading from "./GameHeading";
 
 interface Props {
     gamesQuery: GamesQueryParams;
@@ -14,6 +15,7 @@ const GameGrid = ({ gamesQuery }: Props) => {
     return (
         <>
             {error && <Text>{error}</Text>}
+            <GameHeading gamesQuery={gamesQuery} />
             <SimpleGrid
                 columns={{ sm: 1, md: 2, lg: 3, xl: 5 }}
                 spacing={5}
