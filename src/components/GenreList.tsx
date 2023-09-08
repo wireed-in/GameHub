@@ -1,7 +1,15 @@
-import { HStack, Image, List, ListItem, Button } from "@chakra-ui/react";
+import {
+    HStack,
+    Image,
+    List,
+    ListItem,
+    Button,
+    Heading,
+} from "@chakra-ui/react";
 import useGenres, { Genre } from "../hooks/useGenres";
 import getCroppedImageUrl from "../services/image-url";
 import GenreSkeleton from "./GenreSkeleton";
+import { MdBorderColor } from "react-icons/md";
 
 interface Props {
     onSelectGenre: (selectedGenre: Genre) => void;
@@ -15,6 +23,15 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
 
     return (
         <>
+            <Heading
+                fontSize="2xl"
+                marginY={2}
+                paddingY={2}
+                borderBottom="solid"
+                borderColor={"gray.700"}
+            >
+                Genres
+            </Heading>
             {isLoading &&
                 [...Array(10)].map((_, index) => <GenreSkeleton key={index} />)}
             <List>
@@ -31,6 +48,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
                             <Image
                                 borderRadius="md"
                                 boxSize="32px"
+                                objectFit="cover"
                                 src={getCroppedImageUrl(genre.image_background)}
                             />
                             <Button
