@@ -35,7 +35,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
             {isLoading &&
                 [...Array(10)].map((_, index) => <GenreSkeleton key={index} />)}
             <List>
-                {genres.map((genre) => (
+                {genres?.results.map((genre) => (
                     <ListItem
                         backgroundColor={
                             selectedGenre === genre.id ? "gray.600" : "none"
