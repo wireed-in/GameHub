@@ -6,8 +6,8 @@ import { Platform } from "./usePlatforms";
 const apiClient = new ApiClient<Game>("/games");
 
 export interface GamesQueryParams {
-    selectedGenre: Genre;
-    selectedPlatform: Platform;
+    selectedGenreId?: number;
+    selectedPlatformId?: number;
     selectedSortOrder: string;
     searchText: string;
 }
@@ -26,8 +26,8 @@ const useGames = (queryParams: GamesQueryParams) =>
         queryFn: ({ pageParam = 1 }) =>
             apiClient.getAll({
                 params: {
-                    genres: queryParams.selectedGenre?.id,
-                    parent_platforms: queryParams.selectedPlatform?.id,
+                    genres: queryParams.selectedGenreId,
+                    parent_platforms: queryParams.selectedPlatformId,
                     ordering: queryParams.selectedSortOrder,
                     search: queryParams.searchText,
                     page: pageParam,

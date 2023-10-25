@@ -9,14 +9,13 @@ import {
 import useGenres, { Genre } from "../hooks/useGenres";
 import getCroppedImageUrl from "../services/image-url";
 import GenreSkeleton from "./GenreSkeleton";
-import { MdBorderColor } from "react-icons/md";
 
 interface Props {
-    onSelectGenre: (selectedGenre: Genre) => void;
-    selectedGenre: number | null;
+    onSelectGenre: (selectedGenreId: number) => void;
+    selectedGenreId?: number;
 }
 
-const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
+const GenreList = ({ selectedGenreId, onSelectGenre }: Props) => {
     const { data: genres, error, isLoading } = useGenres();
 
     if (error) return null;
@@ -38,7 +37,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
                 {genres?.results.map((genre) => (
                     <ListItem
                         backgroundColor={
-                            selectedGenre === genre.id ? "gray.600" : "none"
+                            selectedGenreId === genre.id ? "gray.600" : "none"
                         }
                         padding="5px"
                         borderRadius="md"
@@ -52,7 +51,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
                                 src={getCroppedImageUrl(genre.image_background)}
                             />
                             <Button
-                                onClick={() => onSelectGenre(genre)}
+                                onClick={() => onSelectGenre(genre.id)}
                                 variant="link"
                                 fontSize={"lg"}
                             >
