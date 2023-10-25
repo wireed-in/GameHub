@@ -2,6 +2,9 @@ import axios, { AxiosRequestConfig, CanceledError } from "axios";
 
 export interface FetchResponse<T> {
     results: T[];
+    count: number;
+    next: string;
+    previous: string;
 }
 
 const axiosInstance = axios.create({
