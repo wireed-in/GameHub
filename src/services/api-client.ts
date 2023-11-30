@@ -25,6 +25,11 @@ class ApiClient<T> {
         axiosInstance
             .get<FetchResponse<T>>(this.endpoint, requestConfig)
             .then((res) => res.data);
+
+    getBySlug = (slug: string) =>
+        axiosInstance
+            .get<T>(`${this.endpoint}/${slug}`)
+            .then((res) => res.data);
 }
 
 export default ApiClient;

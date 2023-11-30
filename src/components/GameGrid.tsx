@@ -41,6 +41,7 @@ const GameGrid = () => {
                                     <GameCard
                                         key={`game_${pageIndex}_${gameIndex}`}
                                         title={game.name}
+                                        slug={game.slug}
                                         background={getCroppedImageUrl(
                                             game.background_image
                                         )}
