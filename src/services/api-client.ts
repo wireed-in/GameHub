@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, CanceledError } from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 
 export interface FetchResponse<T> {
     results: T[];
