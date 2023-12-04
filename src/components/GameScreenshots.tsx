@@ -1,11 +1,4 @@
-import {
-    Box,
-    Divider,
-    Heading,
-    Image,
-    SimpleGrid,
-    Spinner,
-} from "@chakra-ui/react";
+import { Box, Image, SimpleGrid, Spinner } from "@chakra-ui/react";
 import useGameScreenshots from "../hooks/useGameScreenshots";
 
 interface Props {
@@ -21,14 +14,10 @@ const GameScreenshots = ({ gameId }: Props) => {
     if (data?.results && data.results.length === 0) return null;
 
     return (
-        <Box paddingY={5}>
-            <Heading size={"lg"} color={"gray.600"}>
-                Screenshots
-            </Heading>
-            <Divider marginY={2} />
-            <SimpleGrid columns={{ sm: 1, md: 2 }} marginTop={5} spacing={5}>
+        <Box>
+            <SimpleGrid columns={{ sm: 1, md: 2 }} marginTop={5} spacing={2}>
                 {data?.results.map((screenshot) => (
-                    <Image src={screenshot.image} />
+                    <Image key={screenshot.id} src={screenshot.image} />
                 ))}
             </SimpleGrid>
         </Box>
